@@ -34,7 +34,11 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -43,7 +47,7 @@
     </dependencies>
 
     <build>
-        <finalName>assignement</finalName>
+        <finalName>assignment</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

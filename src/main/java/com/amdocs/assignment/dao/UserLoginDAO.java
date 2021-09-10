@@ -4,4 +4,6 @@ import com.amdocs.assignment.model.User;
 
 public interface UserLoginDAO {
     boolean login(User user);
+
+    User getUser();
 }

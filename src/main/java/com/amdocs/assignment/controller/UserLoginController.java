@@ -1,5 +1,6 @@
 package com.amdocs.assignment.controller;
 
+import com.amdocs.assignment.model.Profile;
 import com.amdocs.assignment.model.User;
 import com.amdocs.assignment.service.UserLoginServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +27,13 @@ public class UserLoginController {
         User user = new User();
         user.setName(name);
         user.setPassword(password);
+        user.setProfile(new Profile());
 
         if (userLoginService.login(user)) {
-            model.put("name", user.getName());
+            model.put("user", user);
             return new ModelAndView("profile");
         }
-        model.put("errorMsg", "Please provide a correct userId and password");
+        model.put("errorMsg", "Please provide a correct userName and password");
         return new ModelAndView("login");
     }
 }

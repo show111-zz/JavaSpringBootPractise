@@ -18,4 +18,9 @@ public class UserLoginServiceImpl implements UserLoginService {
     public boolean login(User user) {
         return userLoginDAO.login(user);
     }
+
+    @Override
+    public User getUser() {
+        return userLoginDAO.getUser();
+    }
 }

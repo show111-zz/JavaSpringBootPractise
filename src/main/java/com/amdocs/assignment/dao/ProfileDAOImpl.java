@@ -13,6 +13,11 @@ public class ProfileDAOImpl implements ProfileDAO {
     @Autowired
     private UserProfileRepository userProfileRepository;
 
+    @Override
+    public Profile getProfile() {
+        return userProfileRepository.findAll().get(0);
+    }
+
     public Profile createProfile(Profile profile) {
         return userProfileRepository.save(profile);
     }
@@ -33,10 +38,12 @@ public class ProfileDAOImpl implements ProfileDAO {
     }
 
     @Override
-    public void deleteProfile(long id) {
+    public boolean deleteProfile(long id) {
         Optional<Profile> profileDB = this.userProfileRepository.findById(id);
         if (profileDB.isPresent()) {
             userProfileRepository.delete(profileDB.get());
+            return true;
         }
+        return false;
     }
 }

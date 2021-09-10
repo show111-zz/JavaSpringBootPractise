@@ -15,6 +15,11 @@ public class UserProfileServiceImpl implements UserProfileService {
     ProfileDAOImpl profileDAO;
 
     @Override
+    public Profile getProfile() {
+        return profileDAO.getProfile();
+    }
+
+    @Override
     public Profile createProfile(Profile profile) {
         return profileDAO.createProfile(profile);
     }
@@ -25,7 +30,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
-    public void deleteProfileById(long id) {
-        profileDAO.deleteProfile(id);
+    public boolean deleteProfileById(long id) {
+        return profileDAO.deleteProfile(id);
     }
 }

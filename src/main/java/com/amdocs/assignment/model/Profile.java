@@ -14,7 +14,7 @@ public class Profile {
 
     private String phone;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "profile")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "profile")
     private User user;
 
     public long getId() {

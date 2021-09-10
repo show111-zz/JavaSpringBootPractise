@@ -4,9 +4,11 @@ import com.amdocs.assignment.model.Profile;
 
 public interface UserProfileService {
 
+    Profile getProfile();
+
     Profile createProfile(Profile profile);
 
     Profile updateProfile(Profile profile);
 
-    void deleteProfileById(long id);
+    boolean deleteProfileById(long id);
 }

@@ -5,8 +5,6 @@ import com.amdocs.assignment.model.User;
 import com.amdocs.assignment.service.UserLoginService;
 import com.amdocs.assignment.service.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,19 +28,32 @@ public class UserProfileController {
             profile.setPhone(phone);
             this.userProfileService.createProfile(profile);
             model.put("result", "created success");
+            model.put("id", profile.getId());
+            model.put("address", address);
+            model.put("phone", phone);
         }
-        return new ModelAndView("profile");
+        return new ModelAndView("edit_profile");
     }
 
-    @PutMapping("/profile/{id}")
-    public ResponseEntity<Profile> updateProfile(@PathVariable long id, @RequestBody Profile profile) {
-        profile.setId(id);
-        return ResponseEntity.ok().body(this.userProfileService.updateProfile(profile));
+    @PutMapping("/profile")
+    public ModelAndView updateProfile(ModelMap model, @RequestParam String address, @RequestParam String phone) {
+        Profile profile = userProfileService.getProfile();
+        profile.setId(profile.getId());
+        profile.setAddress(address);
+        profile.setPhone(phone);
+        this.userProfileService.updateProfile(profile);
+        model.put("result", "update success");
+        model.put("id", profile.getId());
+        model.put("address", address);
+        model.put("phone", phone);
+        return new ModelAndView("add_profile");
     }
 
-    @DeleteMapping("/profile/{id}")
-    public HttpStatus deleteProfile(@PathVariable long id) {
-        this.userProfileService.deleteProfileById(id);
-        return HttpStatus.OK;
+    @DeleteMapping("/profile")
+    public ModelAndView deleteProfile(ModelMap model) {
+        Profile profile = userProfileService.getProfile();
+        boolean isSuccess = this.userProfileService.deleteProfileById(profile.getId());
+        model.put("result", isSuccess? "Deleted success" : "Deleted failed");
+        return new ModelAndView("add_profile");
     }
 }

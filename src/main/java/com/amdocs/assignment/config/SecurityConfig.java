@@ -16,17 +16,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("admin")
                 .password("root")
-                .roles("ADMIN");
+                .roles("ADMIN", "USER");
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/assignment").fullyAuthenticated()
-                .antMatchers("/login").fullyAuthenticated()
-                .antMatchers("/profile").fullyAuthenticated()
-                .and().httpBasic();
+                .antMatchers("/assignment", "/login", "/h2-console/**").permitAll()
+                .antMatchers("/profile").access("hasRole('USER')")
+                .anyRequest().authenticated()
+                .and().formLogin();
     }
 
     @Bean

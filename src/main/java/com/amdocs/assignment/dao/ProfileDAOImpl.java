@@ -40,13 +40,11 @@ public class ProfileDAOImpl implements ProfileDAO {
     }
 
     @Override
-    public boolean deleteProfile(long id) {
+    public void deleteProfile(long id) {
         Optional<Profile> profileDB = this.userProfileRepository.findById(id);
         if (profileDB.isPresent()) {
             userProfileRepository.delete(profileDB.get());
-            return true;
         }
-        return false;
     }
 
     @Override

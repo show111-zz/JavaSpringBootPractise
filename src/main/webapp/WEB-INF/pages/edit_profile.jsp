@@ -6,8 +6,7 @@
     <title>Edit User Profile Page</title>
 </head>
 <body>
-<h2>User Profile</h2>
-<h3>Edit result: ${result}</h3>
+<h2>Edit User Profile</h2>
 
 <form method="post" action="/profile">
     <div class="container">

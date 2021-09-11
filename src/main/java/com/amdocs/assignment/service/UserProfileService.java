@@ -12,7 +12,7 @@ public interface UserProfileService {
 
     Profile updateProfile(Profile profile);
 
-    boolean deleteProfileById(long id);
+    void deleteProfileById(long id);
 
     List<Profile> getAllProfiles();
 }

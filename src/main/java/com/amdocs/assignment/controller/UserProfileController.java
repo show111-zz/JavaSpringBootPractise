@@ -42,7 +42,6 @@ public class UserProfileController {
             model.put("id", profileCreate.getId());
         }
 
-        model.put("result", "created success");
         model.put("address", address);
         model.put("phone", phone);
         return new ModelAndView("edit_profile");
@@ -54,7 +53,6 @@ public class UserProfileController {
         profile.setAddress(address);
         profile.setPhone(phone);
         this.userProfileService.updateProfile(profile);
-        model.put("result", "update success");
         model.put("id", profile.getId());
         model.put("address", address);
         model.put("phone", phone);
@@ -64,8 +62,7 @@ public class UserProfileController {
     @DeleteMapping("/profile")
     public ModelAndView deleteProfile(ModelMap model) {
         Profile profile = userProfileService.getAllProfiles().get(0);
-        boolean isSuccess = this.userProfileService.deleteProfileById(profile.getId());
-        model.put("result", isSuccess ? "Deleted success" : "Deleted failed");
+        this.userProfileService.deleteProfileById(profile.getId());
         return new ModelAndView("add_profile");
     }
 }

@@ -11,7 +11,7 @@ public interface ProfileDAO {
 
     Profile updateProfile(Profile profile);
 
-    boolean deleteProfile(long id);
+    void deleteProfile(long id);
 
     List<Profile> getAllProfiles();
 }

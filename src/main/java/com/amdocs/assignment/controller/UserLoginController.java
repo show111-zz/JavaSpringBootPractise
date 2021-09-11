@@ -27,10 +27,9 @@ public class UserLoginController {
         User user = new User();
         user.setName(name);
         user.setPassword(password);
-        user.setProfile(new Profile());
 
         if (userLoginService.login(user)) {
-            model.put("user", user);
+            model.put("name", name);
             return new ModelAndView("add_profile");
         }
         model.put("errorMsg", "Please provide a correct userName and password");

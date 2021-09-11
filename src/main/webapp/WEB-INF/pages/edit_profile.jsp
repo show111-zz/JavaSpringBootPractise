@@ -13,13 +13,13 @@
     <div class="container">
         <input type="hidden" name="_method" value="put">
         <label>Id : </label>
-        <input type="text" placeholder="${id}" name="id" readonly>
+        <input type="number" placeholder="${id}" name="id" value="${id}" readonly>
         <br> <br>
         <label>Address : </label>
-        <input type="text" placeholder="${address}" name="address" required>
+        <input type="text" placeholder="${address}" value="${profile.address}" name="address">
         <br> <br>
         <label>Phone : </label>
-        <input type="number" placeholder="${phone}" name="phone" value="PUT" required>
+        <input type="number" placeholder="${phone}" value="${profile.phone}" name="phone">
         <br> <br>
         <button type="submit">Edit</button>
         <br>

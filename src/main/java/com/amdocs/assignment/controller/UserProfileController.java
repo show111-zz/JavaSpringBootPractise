@@ -9,6 +9,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @RestController
 public class UserProfileController {
 
@@ -21,24 +23,34 @@ public class UserProfileController {
     @PostMapping("/profile")
     public ModelAndView createProfile(ModelMap model, @RequestParam String address, @RequestParam String phone) {
         User user = userLoginService.getUser();
-        if (user != null) {
-            Profile profile = user.getProfile();
-            profile.setId(profile.getId());
-            profile.setAddress(address);
-            profile.setPhone(phone);
-            this.userProfileService.createProfile(profile);
-            model.put("result", "created success");
-            model.put("id", profile.getId());
-            model.put("address", address);
-            model.put("phone", phone);
+        List<Profile> profiles = userProfileService.getAllProfiles();
+        if (profiles != null && profiles.size() != 0) {
+            for (Profile p : profiles) {
+                if (p.getUser().getId() == user.getId()) {
+                    p.setAddress(address);
+                    p.setPhone(phone);
+                    this.userProfileService.updateProfile(p);
+                    model.put("id", p.getId());
+                }
+            }
+        } else {
+            Profile profileCreate = new Profile();
+            profileCreate.setAddress(address);
+            profileCreate.setPhone(phone);
+            profileCreate.setUser(user);
+            this.userProfileService.createProfile(profileCreate);
+            model.put("id", profileCreate.getId());
         }
+
+        model.put("result", "created success");
+        model.put("address", address);
+        model.put("phone", phone);
         return new ModelAndView("edit_profile");
     }
 
     @PutMapping("/profile")
-    public ModelAndView updateProfile(ModelMap model, @RequestParam String address, @RequestParam String phone) {
-        Profile profile = userProfileService.getProfile();
-        profile.setId(profile.getId());
+    public ModelAndView updateProfile(ModelMap model, @RequestParam long id, @RequestParam String address, @RequestParam String phone) {
+        Profile profile = userProfileService.getProfile(id);
         profile.setAddress(address);
         profile.setPhone(phone);
         this.userProfileService.updateProfile(profile);
@@ -51,9 +63,9 @@ public class UserProfileController {
 
     @DeleteMapping("/profile")
     public ModelAndView deleteProfile(ModelMap model) {
-        Profile profile = userProfileService.getProfile();
+        Profile profile = userProfileService.getAllProfiles().get(0);
         boolean isSuccess = this.userProfileService.deleteProfileById(profile.getId());
-        model.put("result", isSuccess? "Deleted success" : "Deleted failed");
+        model.put("result", isSuccess ? "Deleted success" : "Deleted failed");
         return new ModelAndView("add_profile");
     }
 }

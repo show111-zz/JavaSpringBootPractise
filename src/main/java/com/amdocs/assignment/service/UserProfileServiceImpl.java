@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -15,8 +16,8 @@ public class UserProfileServiceImpl implements UserProfileService {
     ProfileDAOImpl profileDAO;
 
     @Override
-    public Profile getProfile() {
-        return profileDAO.getProfile();
+    public Profile getProfile(long id) {
+        return profileDAO.getProfile(id);
     }
 
     @Override
@@ -32,5 +33,10 @@ public class UserProfileServiceImpl implements UserProfileService {
     @Override
     public boolean deleteProfileById(long id) {
         return profileDAO.deleteProfile(id);
+    }
+
+    @Override
+    public List<Profile> getAllProfiles() {
+        return profileDAO.getAllProfiles();
     }
 }

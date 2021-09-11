@@ -5,8 +5,8 @@
     <title>User Profile Page</title>
 </head>
 <body>
-    <h2>User Profile</h2>
-    <h3>create result:  ${result}</h3>
+    <h2>User Profile of ${name}</h2>
+    <h3>Result:  ${result}</h3>
 
         <form method="post" action="/profile">
         <div class="container">

@@ -14,7 +14,8 @@ public class Profile {
 
     private String phone;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "profile")
+    @OneToOne(cascade = CascadeType.PERSIST, optional = true)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     public long getId() {

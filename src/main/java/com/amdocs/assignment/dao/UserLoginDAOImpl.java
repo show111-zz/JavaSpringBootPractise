@@ -25,7 +25,7 @@ public class UserLoginDAOImpl implements UserLoginDAO {
     }
 
     @Override
-    public User getUser() {
+    public User getUserByName() {
         List<User> list = userLoginRepository.findAll();
         if (list != null && list.size() != 0) {
             return list.get(0);

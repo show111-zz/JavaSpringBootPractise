@@ -5,6 +5,7 @@ import com.amdocs.assignment.repository.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -14,8 +15,9 @@ public class ProfileDAOImpl implements ProfileDAO {
     private UserProfileRepository userProfileRepository;
 
     @Override
-    public Profile getProfile() {
-        return userProfileRepository.findAll().get(0);
+    public Profile getProfile(long id) {
+        Optional<Profile> profile = userProfileRepository.findById(id);
+        return profile.orElse(null);
     }
 
     public Profile createProfile(Profile profile) {
@@ -45,5 +47,10 @@ public class ProfileDAOImpl implements ProfileDAO {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<Profile> getAllProfiles() {
+        return this.userProfileRepository.findAll();
     }
 }

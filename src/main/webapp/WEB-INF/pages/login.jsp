@@ -6,7 +6,7 @@
 <body>
 <h1>Login</h1>
 <h5>${errorMsg}</h5>
-<form method="post">
+<form method="post" action="/assignment">
     <div class="container">
         <label>Username : </label>
         <input type="text" placeholder="Enter Username" name="name" required>

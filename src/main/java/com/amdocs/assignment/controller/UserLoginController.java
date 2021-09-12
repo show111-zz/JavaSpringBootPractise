@@ -1,8 +1,7 @@
 package com.amdocs.assignment.controller;
 
 import com.amdocs.assignment.model.Profile;
-import com.amdocs.assignment.model.User;
-import com.amdocs.assignment.service.UserLoginServiceImpl;
+import com.amdocs.assignment.service.UserLoginService;
 import com.amdocs.assignment.service.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
@@ -18,7 +17,7 @@ import java.util.List;
 public class UserLoginController {
 
     @Autowired
-    UserLoginServiceImpl userLoginService;
+    UserLoginService userLoginService;
 
     @Autowired
     private UserProfileService userProfileService;
@@ -30,18 +29,13 @@ public class UserLoginController {
 
     @PostMapping(value = "/assignment")
     public ModelAndView login(ModelMap model, @RequestParam String name, @RequestParam String password) {
-        User user = new User();
-        user.setName(name);
-        user.setPassword(password);
-        if (userLoginService.login(user)) {
-
+        if (userLoginService.login(name, password) != null) {
             List<Profile> profiles = userProfileService.getAllProfiles();
             if(profiles != null && profiles.size() != 0){
                 model.put("id", profiles.get(0).getId());
                 model.put("address", profiles.get(0).getAddress());
                 model.put("phone", profiles.get(0).getPhone());
             }
-            model.put("name", name);
             return new ModelAndView("add_profile");
         }
         model.put("errorMsg", "Please provide a correct userName and password");

@@ -14,22 +14,17 @@ public class UserLoginDAOImpl implements UserLoginDAO {
     UserLoginRepository userLoginRepository;
 
     @Override
-    public boolean login(User user) {
+    public User login(String name, String password) {
+        // Todo Delete this line after filling the init username and password
+        userLoginRepository.save(new User(name, password));
         List<User> list = userLoginRepository.findAll();
-        for (User u : list) {
-            if (u.getName().equals(user.getName()) && u.getPassword().equals(user.getPassword())) {
-                return true;
-            }
-        }
-        return false;
+        return list.stream().filter(user -> user.getName().equals(name) && user.getPassword().equals(password))
+                .findFirst().orElse(null);
     }
 
     @Override
-    public User getUserByName() {
+    public User getUser() {
         List<User> list = userLoginRepository.findAll();
-        if (list != null && list.size() != 0) {
-            return list.get(0);
-        }
-        return null;
+        return list.stream().findFirst().orElse(null);
     }
 }

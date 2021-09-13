@@ -16,7 +16,7 @@ public class UserLoginDAOImpl implements UserLoginDAO {
     @Override
     public User login(String name, String password) {
         // Todo Delete this line after filling the init username and password
-        userLoginRepository.save(new User(name, password));
+//        userLoginRepository.save(new User(name, password));
         List<User> list = userLoginRepository.findAll();
         return list.stream().filter(user -> user.getName().equals(name) && user.getPassword().equals(password))
                 .findFirst().orElse(null);

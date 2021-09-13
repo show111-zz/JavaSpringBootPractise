@@ -22,8 +22,13 @@ public class UserLoginController {
     @Autowired
     private UserProfileService userProfileService;
 
+    @RequestMapping(value = "/")
+    public ModelAndView initLogin2() {
+        return new ModelAndView("index");
+    }
+
     @RequestMapping(value = "/assignment")
-    public ModelAndView myLogin() {
+    public ModelAndView initLogin() {
         return new ModelAndView("login");
     }
 

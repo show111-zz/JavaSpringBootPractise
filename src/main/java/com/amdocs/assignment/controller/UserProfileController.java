@@ -60,7 +60,7 @@ public class UserProfileController {
     }
 
     @DeleteMapping("/profile")
-    public ModelAndView deleteProfile(ModelMap model) {
+    public ModelAndView deleteProfile() {
         Profile profile = userProfileService.getAllProfiles().get(0);
         this.userProfileService.deleteProfileById(profile.getId());
         return new ModelAndView("add_profile");

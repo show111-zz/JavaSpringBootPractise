@@ -14,11 +14,21 @@ public class UserLoginServiceImpl implements UserLoginService {
     @Autowired
     UserLoginDAO userLoginDAO;
 
+    /**
+     * The user instance base on the username and password
+     * @param name username
+     * @param password password
+     * @return
+     */
     @Override
     public User login(String name, String password) {
         return userLoginDAO.login(name, password);
     }
 
+    /**
+     * Get the user
+     * @return the authorizated user
+     */
     @Override
     public User getUser() {
         return userLoginDAO.getUser();

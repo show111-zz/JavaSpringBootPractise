@@ -13,6 +13,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /**
+     * set the configuration for the fixed username and password
+     * @param auth username is admin, password is root
+     * @throws Exception
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
@@ -21,6 +26,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .roles("ADMIN", "USER");
     }
 
+    /**
+     * config the specific request address used in the project
+     * @param http  GET, POST, PUT, DELETE
+     * @throws Exception
+     */
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
@@ -31,6 +41,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().formLogin();
     }
 
+    /**
+     * Handling password
+     * @return
+     */
     @Bean
     public PasswordEncoder getPasswordEncoder() {
         return NoOpPasswordEncoder.getInstance();

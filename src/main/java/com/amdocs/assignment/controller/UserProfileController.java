@@ -20,6 +20,13 @@ public class UserProfileController {
     @Autowired
     private UserLoginService userLoginService;
 
+    /**
+     * Post request for the http://localhost/profile. It will create a new profile to the related user.
+     * @param model
+     * @param address user's address
+     * @param phone user's phone number
+     * @return It will load the edit_profile page after creating profile information.
+     */
     @PostMapping("/profile")
     public ModelAndView createProfile(ModelMap model, @RequestParam String address, @RequestParam String phone) {
         User user = userLoginService.getUser();
@@ -47,6 +54,14 @@ public class UserProfileController {
         return new ModelAndView("edit_profile");
     }
 
+    /**
+     * Put request for the http://localhost/profile. It will update profile's information.
+     * @param model
+     * @param id the id for the old profile
+     * @param address user's address
+     * @param phone user's phone number
+     * @return
+     */
     @PutMapping("/profile")
     public ModelAndView updateProfile(ModelMap model, @RequestParam long id, @RequestParam String address, @RequestParam String phone) {
         Profile profile = userProfileService.getProfile(id);
@@ -59,6 +74,10 @@ public class UserProfileController {
         return new ModelAndView("add_profile");
     }
 
+    /**
+     * Delete request for the http://localhost/profile. It will delete the profile's information to the related user.
+     * @return It will load the add_profile page after deleting the profile information.
+     */
     @DeleteMapping("/profile")
     public ModelAndView deleteProfile() {
         Profile profile = userProfileService.getAllProfiles().get(0);

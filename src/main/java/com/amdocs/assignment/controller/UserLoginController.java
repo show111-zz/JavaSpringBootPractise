@@ -22,16 +22,31 @@ public class UserLoginController {
     @Autowired
     private UserProfileService userProfileService;
 
+    /**
+     * the init Get request
+     * @return
+     */
     @RequestMapping(value = "/")
     public ModelAndView initLogin2() {
         return new ModelAndView("index");
     }
 
+    /**
+     * Get request for the http://localhost/assignment
+     * @return the login page that let user input the username and password
+     */
     @RequestMapping(value = "/assignment")
     public ModelAndView initLogin() {
         return new ModelAndView("login");
     }
 
+    /**
+     * Post request for the http://localhost/assignment with the parameter username and password
+     * @param model
+     * @param name username
+     * @param password  password
+     * @return if the username and password have permitted then load the add_profile page, if not will load the login page
+     */
     @PostMapping(value = "/assignment")
     public ModelAndView login(ModelMap model, @RequestParam String name, @RequestParam String password) {
         if (userLoginService.login(name, password) != null) {

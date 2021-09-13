@@ -13,6 +13,12 @@ public class UserLoginDAOImpl implements UserLoginDAO {
     @Autowired
     UserLoginRepository userLoginRepository;
 
+    /**
+     * Pass the username and password to login
+     * @param name username
+     * @param password password
+     * @return The user object according to the name and password
+     */
     @Override
     public User login(String name, String password) {
         // Todo Delete this line after filling the init username and password
@@ -22,6 +28,10 @@ public class UserLoginDAOImpl implements UserLoginDAO {
                 .findFirst().orElse(null);
     }
 
+    /**
+     * Get user from the database
+     * @return The user object
+     */
     @Override
     public User getUser() {
         List<User> list = userLoginRepository.findAll();

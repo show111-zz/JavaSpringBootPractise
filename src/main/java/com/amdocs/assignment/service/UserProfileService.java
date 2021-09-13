@@ -6,13 +6,36 @@ import java.util.List;
 
 public interface UserProfileService {
 
+    /**
+     * Get a profile
+     * @param id id
+     * @return the new profile
+     */
     Profile getProfile(long id);
 
+    /**
+     * Create a new profile
+     * @param profile profile
+     * @return the profile
+     */
     Profile createProfile(Profile profile);
 
+    /**
+     * Update profile base on a new profile
+     * @param profile profile
+     * @return the updated profile
+     */
     Profile updateProfile(Profile profile);
 
+    /**
+     * Delete profile from id
+     * @param id id
+     */
     void deleteProfileById(long id);
 
-    List<Profile> getAllProfiles();
+    /**
+     * Get all of the profiles
+     * @return the list of all of the profiles
+     */
+     List<Profile> getAllProfiles();
 }
